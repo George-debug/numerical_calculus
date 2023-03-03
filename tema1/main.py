@@ -32,7 +32,7 @@ def verify_mul_asociativity():
     i = 1
     while True:
         u = 10**(-i)
-        if (1.1 + u) + u != 1.1 + (u + u):
+        if (1.1 * u) * u != 1.1 * (u * u):
             return (1.1, u, u)
 
         i += 1
@@ -261,13 +261,25 @@ def create_plot_test(max_i=10, n_min=8):
 
     animateWrapper = PlotAnimateWrapper(animate, max_i)
 
-    ani = animation.FuncAnimation(fig, animateWrapper, interval=2000)
+    ani = animation.FuncAnimation(fig, animateWrapper, interval=1000)
 
     plt.show()
 
 
 if __name__ == '__main__':
     create_plot_test(max_i=100, n_min=8)
+
+    x, y, z = verify_add_asociativity()
+    sum1 = (x + y) + z
+    sum2 = x + (y + z)
+    print(f"( {x} + {y} ) + {z} != {x} + ( {y} + {z} ) ")
+    print(sum1, "!= ", sum2)
+
+    x, y, z = verify_mul_asociativity()
+    prod1 = (x * y) * z
+    prod2 = x * (y * z)
+    print(f"( {x} * {y} ) * {z} != {x} * ( {y} * {z} ) ")
+    print(prod1, "!= ", prod2)
 
     # strassen_time, simple_time = get_test(1000, n_min=4)
 
